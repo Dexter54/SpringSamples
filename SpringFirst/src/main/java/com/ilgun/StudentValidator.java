@@ -8,16 +8,17 @@ import org.springframework.validation.Validator;
 @Component
 public class StudentValidator implements Validator {
 
-    @Override
+   @Override
     public boolean supports(Class<?> aClass) {
-        return Student.class.equals(aClass);
+       return true;
+        //return Student.class.equals(aClass);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
 
-        ValidationUtils.rejectIfEmpty(errors, "name", "boş olamaz");
-        ValidationUtils.rejectIfEmpty(errors, "age", "boş olamaz");
+     //   ValidationUtils.rejectIfEmpty(errors, "name", "boş olamaz");
+       // ValidationUtils.rejectIfEmpty(errors, "age", "boş olamaz");
 
 
 

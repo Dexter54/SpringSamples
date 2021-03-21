@@ -11,30 +11,50 @@ public class Student {
 
     private String name;
 
+    private String surname;
+
+    private String Dep;
+
 
     public String getName() {
-        System.out.println("name : " + name);
+
         return name;
     }
 
     public void setName(String name) {
-        System.out.println("setter1 : ");
+
         this.name = name;
 
     }
 
     public Integer getAge() {
-        System.out.println("age : " + age);
+
         return age;
     }
 
     public void setAge(Integer age) {
-        System.out.println("setter2 : ");
+
         this.age = age;
     }
 
     public void printThrowException(){
         System.out.println("Exception raised");
         throw new IllegalArgumentException();
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getDep() {
+        return Dep;
+    }
+
+    public void setDep(String dep) {
+        Dep = dep;
     }
 }

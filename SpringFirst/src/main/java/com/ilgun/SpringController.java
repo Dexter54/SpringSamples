@@ -7,6 +7,7 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.MultiValueMap;
@@ -16,28 +17,34 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.sql.DataSource;
 import javax.validation.Valid;
 
 @Controller
-
 public class SpringController {
 
     @Autowired
-    private StudentValidator studentValidator;
+    DriverDB driver;
 
+    /*@Autowired
+    private StudentValidator studentValidator;
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.addValidators(studentValidator);
-    }
+    }*/
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String hello(ModelMap model) {
+    public String hello(ModelMap model,@ModelAttribute(value = "student") Student temp) {
 
-        Student temp = new Student();
-        temp.setAge(18);
-        temp.setName("onur");
+       // Student temp = new Student();
+       /* temp.setAge(18);
+        temp.setName("Hüseyin");
+        temp.setSurname("İlgün");
+        temp.setDep("Computer");*/
         model.addAttribute("name", temp.getName());
+        model.addAttribute("Surname", temp.getSurname());
+        model.addAttribute("Dep", temp.getDep());
         model.addAttribute("age", temp.getAge());
         return "index";
     }
@@ -62,6 +69,25 @@ public class SpringController {
         return ResponseEntity.ok(JSESSIONID + "<br />" + cerez);
     }
 
+    @RequestMapping("/form")
+    public ModelAndView form(ModelMap modelMap,@ModelAttribute(value = "studentmanager") StudentManager stu) {
+
+        modelMap.addAttribute("studentmanager",stu);
+        return new ModelAndView("form", modelMap, HttpStatus.OK);
+    }
+
+    @RequestMapping("/son")
+    public Object son(@ModelAttribute("studentmanager") StudentManager stu
+    ) {
+
+        driver.save(stu);
+
+        return ResponseEntity.ok(stu.getStud().getName()+ "  " + stu.getStud().getSurname() +  "   " +
+                stu.getStud().getDep()  + "   " + stu.getStud().getAge());
+
+
+    }
+
 
     @RequestMapping("/modelx/{merhaba}")
     public ResponseEntity<String> modelx(
@@ -77,23 +103,6 @@ public class SpringController {
         return ResponseEntity.ok(String.valueOf(id));
     }
 
-    @RequestMapping("/form")
-    public ModelAndView form(ModelMap modelMap,@ModelAttribute(value = "message") String message) {
-        Student stu = new Student();
-        modelMap.addAttribute("mesaj", message);
-        modelMap.addAttribute("student",stu);
-        return new ModelAndView("form", modelMap, HttpStatus.OK);
-    }
 
-    @RequestMapping("/son")
-    public Object son(@ModelAttribute("student") @Validated  Student student,
-                      BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()) {
-            return "form";
-        }else {
-            return ResponseEntity.ok(student.getName() + student.getAge());
-        }
-    }
 
 }
