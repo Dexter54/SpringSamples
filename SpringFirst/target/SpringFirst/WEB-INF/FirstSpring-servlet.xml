@@ -19,5 +19,43 @@
         <property name = "suffix" value = ".jsp" />
     </bean>
 
-    <mvc:annotation-driven/>
+
+
+    <bean id="student" class="com.ilgun.Student">
+        <property name="name" value="Zara"/>
+        <property name="surname" value="Kkk"/>
+        <property name="Dep" value="Computer"/>
+        <property name="age" value="11"/>
+    </bean>
+
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/student"/>
+        <property name="username" value="root"/>
+        <property name="password" value="0000"/>
+
+    </bean>
+
+    <bean id="txManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="driver" class="com.ilgun.DriverDB">
+        <property name="template" ref="jt"/>
+    </bean>
+
+
+    <bean id="StudentManager" class="com.ilgun.StudentManager">
+        <constructor-arg ref="student"/>
+        <property name="stud" ref="student"/>
+    </bean>
+
+
+
 </beans>

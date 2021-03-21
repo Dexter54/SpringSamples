@@ -7,8 +7,11 @@
    </head>
 
    <body>
-      <h2>${age}</h2>
+
       <h2>${name}</h2>
+      <h2>${surname}</h2>
+      <h2>${Dep}</h2>
+      <h2>${age}</h2>
 
 
    </body>
