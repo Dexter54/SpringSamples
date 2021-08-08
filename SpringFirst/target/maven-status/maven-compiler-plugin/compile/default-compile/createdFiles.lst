@@ -8,6 +8,8 @@ com\ilgun\Car.class
 com\ilgun\SpringController.class
 com\ilgun\StudentValidator.class
 com\ilgun\Driver.class
+com\ilgun\ExcelXlsxView.class
+com\ilgun\Link.class
 com\ilgun\Logging.class
 com\ilgun\SpringFirstConfig.class
 com\ilgun\StudentManager.class

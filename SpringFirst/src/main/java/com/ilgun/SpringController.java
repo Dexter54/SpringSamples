@@ -19,12 +19,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.sql.DataSource;
 import javax.validation.Valid;
+import java.util.LinkedList;
+import java.util.List;
 
 @Controller
 public class SpringController {
 
     @Autowired
     DriverDB driver;
+
+    @Autowired
+    Student temp;
 
     /*@Autowired
     private StudentValidator studentValidator;
@@ -35,18 +40,27 @@ public class SpringController {
     }*/
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
-    public String hello(ModelMap model,@ModelAttribute(value = "student") Student temp) {
+    public String hello(ModelMap model) {
 
-       // Student temp = new Student();
-       /* temp.setAge(18);
-        temp.setName("Hüseyin");
-        temp.setSurname("İlgün");
-        temp.setDep("Computer");*/
         model.addAttribute("name", temp.getName());
-        model.addAttribute("Surname", temp.getSurname());
+        model.addAttribute("surname", temp.getSurname());
         model.addAttribute("Dep", temp.getDep());
         model.addAttribute("age", temp.getAge());
         return "index";
+
+    }
+
+
+    @RequestMapping(value = "/ExcelView", method = RequestMethod.GET)
+    public ModelAndView getExcel(){
+        System.out.println("getExcel!");
+
+        List<Link> links = new LinkedList<Link>();
+        links.add(new Link("Android", "android.com"));
+        links.add(new Link("Spring", "spring.io"));
+        links.add(new Link("Firebase", "firebase.com"));
+
+        return new ModelAndView("ExcelXlsxView", "model", links);
     }
 
 

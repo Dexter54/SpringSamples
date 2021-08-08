@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class StudentManager {
 
-    @Autowired
+
     private Student stud;
 
     public StudentManager(Student temp) {

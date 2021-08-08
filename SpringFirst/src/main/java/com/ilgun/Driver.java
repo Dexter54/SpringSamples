@@ -26,7 +26,7 @@ public class Driver {
         helloWorld.setMessage(temp);
         helloWorld.getMessage();*/
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("src/main/webapp/WEB-INF/spring-config.xml");
 
         Student student = (Student) context.getBean("student");
         student.getName();

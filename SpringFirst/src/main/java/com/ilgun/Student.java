@@ -22,7 +22,7 @@ public class Student {
     }
 
     public void setName(String name) {
-
+        System.out.println(name);
         this.name = name;
 
     }
@@ -47,6 +47,7 @@ public class Student {
     }
 
     public void setSurname(String surname) {
+        System.out.println(surname);
         this.surname = surname;
     }
 
@@ -55,6 +56,7 @@ public class Student {
     }
 
     public void setDep(String dep) {
+        System.out.println(dep);
         Dep = dep;
     }
 }
